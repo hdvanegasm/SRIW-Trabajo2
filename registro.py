@@ -1,46 +1,6 @@
 from tkinter import *
 from conexion import *
 
-##################################### UTILS ############################################
-def checkIfNull(email, name, password, rpassword):
-    return email != '' and name != '' and password != '' and rpassword != ''
-
-def checkPass(pass1, pass2):
-    return pass1 == pass2
-
-def insertUser(emailValue, nameValue, passValue):
-    query = ("INSERT INTO usuario "
-            "(correo, nombre, contrasena) "
-            "VALUES (%s, %s, %s)")
-    data = (emailValue, nameValue, passValue)
-    ejecutar_insercion(query, data)
-
-def clearData():
-    email.delete(0, END)
-    name.delete(0, END)
-    password.delete(0, END)
-    rpassword.delete(0, END)
-
-##################################### REGISTER SECTION ############################################
-def registro():
-    emailValue = email.get().strip()
-    nameValue = name.get()
-    passValue = password.get()
-    rpassValue = rpassword.get()
-
-    if (checkIfNull(emailValue, nameValue, passValue, rpassValue) and checkPass(passValue, rpassValue)):
-        insertUser(emailValue, nameValue, passValue)
-        clearData()
-
-    else : 
-        print('Falta data')
-
-##################################### LOGIN SECTION ############################################
-def irALogin():
-    registerScreen.destroy()
-
-##################################### DESIGN SECTION ############################################
-
 def initRegistration(parent):
     global registerScreen
     global email
@@ -48,6 +8,47 @@ def initRegistration(parent):
     global password
     global rpassword
 
+    ##################################### UTILS ############################################
+    def checkIfNull(email, name, password, rpassword):
+        return email != '' and name != '' and password != '' and rpassword != ''
+
+    def checkPass(pass1, pass2):
+        return pass1 == pass2
+
+    def insertUser(emailValue, nameValue, passValue):
+        query = ("INSERT INTO usuario "
+                "(correo, nombre, contrasena) "
+                "VALUES (%s, %s, %s)")
+        data = (emailValue, nameValue, passValue)
+        ejecutar_insercion(query, data)
+
+    def clearData():
+        email.delete(0, END)
+        name.delete(0, END)
+        password.delete(0, END)
+        rpassword.delete(0, END)
+
+    ##################################### REGISTER SECTION ############################################
+    def registro():
+        emailValue = email.get().strip()
+        nameValue = name.get()
+        passValue = password.get()
+        rpassValue = rpassword.get()
+
+        if (checkIfNull(emailValue, nameValue, passValue, rpassValue) and checkPass(passValue, rpassValue)):
+            insertUser(emailValue, nameValue, passValue)
+            clearData()
+
+        else : 
+            print('Falta data')
+
+    ##################################### LOGIN SECTION ############################################
+    def irALogin():
+        registerScreen.destroy()
+
+
+
+    ##################################### DESIGN SECTION ############################################
     registerScreen = Toplevel(parent)
     registerScreen.title('Registro')
 

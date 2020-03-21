@@ -24,13 +24,14 @@ def login():
 
     if (checkIfNull(emailValue, passValue) and checkIfUserExist(emailValue, passValue)):
         clearData()
-        initHome(screen)
+        initHome(screen, emailValue)
+        screen.withdraw()
 
 ##################################### REGISTER SECTION ############################################
 def register():
     initRegistration(screen)
-##################################### DESIGN SECTION ############################################
 
+##################################### DESIGN SECTION ############################################
 screen = Tk()
 screen.title('Login')
 
