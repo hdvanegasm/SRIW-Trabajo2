@@ -9,7 +9,36 @@ conexion_db = mysql.connector.connect(
    database="muebles"
 )
 
-def insertar_muebles(lista_muebles):
-    for mueble in lista_muebles:
-        query_insercion = ("INSERT INTO mueble
-            "(referencia, categoria, precio, peso, ancho, alto")
+def ejecutar_consulta(query):
+    cursor = conexion_db.cursor()
+    cursor.execute(query)
+    
+    resultados = list()
+    
+    for resultado in cursor:
+        resultados.append(resultado)
+        
+    cursor.close()
+    return resultados
+    
+def ejecutar_actualizacion(query, datos):
+    """
+    La variable datos es una tupla con los datos a actualizar y los que estan en el where
+    """
+    cursor = conexion_db.cursor()
+    cursor.execute(query, datos)
+    conexion_db.commit()
+    cursor.close()
+
+def ejecutar_insercion(query, datos):
+    """
+    La variable datos es una tupla con los datos a insertar
+    """
+    cursor = conexion_db.cursor()
+    cursor.execute(query, datos)
+    conexion_db.commit()
+    cursor.close()
+    
+    
+
+
