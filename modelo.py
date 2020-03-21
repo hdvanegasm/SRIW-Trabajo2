@@ -1,6 +1,6 @@
 class Mueble:
 
-  def __init__(self, referencia, categoria, precio, peso, ancho, alto, fondo, urls=[], observaciones="", estado=True):
+  def __init__(self, referencia, categoria, precio, peso, ancho, alto, fondo, urls=[], observaciones="", estado=1):
     self.referencia = referencia
     self.categoria = categoria
     self.precio = precio
