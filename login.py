@@ -1,7 +1,8 @@
 from tkinter import *
 from conexion import *
+from scrapper import *
 from registro import *
-from home import *
+from objects_list import *
 
 ##################################### UTILS ############################################
 def checkIfNull(email, password):
@@ -16,6 +17,9 @@ def checkIfUserExist(email, password):
 def clearData():
     email.delete(0, END)
     password.delete(0, END)
+
+def loadData():
+    poblar_db()
 
 ##################################### LOGIN SECTION ############################################
 def login():
@@ -53,6 +57,9 @@ login.grid(row=3, column=0, padx=5, pady=5, sticky="nsew")
 
 register = Button(screen, text='Register', command=register)
 register.grid(row=3, column=1, padx=5, pady=5, sticky="nsew")
+
+loadData = Button(screen, text='Load data', command=loadData)
+loadData.grid(row=4, column=0, columnspan=2, sticky="nsew")
 
 screen.grid_columnconfigure(0,weight=1)
 screen.grid_columnconfigure(1,weight=1)
