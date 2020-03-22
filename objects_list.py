@@ -6,12 +6,6 @@ def initHome(parent, email):
     homeScreen = Toplevel(parent)
     homeScreen.title('Lista de muebles')
 
-    objectsList = []
-    objectsList.append(Mueble(1,2,122222, 3, 4, 5, 6, 'holi', 1, 'https://google.com'))
-    objectsList.append(Mueble(1,2,122222, 3, 4, 5, 6, 'holi', 1, 'https://google.com'))
-    objectsList.append(Mueble(1,2,122222, 3, 4, 5, 6, 'holi', 1, 'https://google.com'))
-
-
     ##################################### UTILS ############################################
     def showItem(itemsFrame, item, i):
         Label(itemsFrame, text=item['referencia']).grid(row=i, column=0)
@@ -35,6 +29,9 @@ def initHome(parent, email):
         Label(itemsFrame, text='Calificacion').grid(row=0, column=7)
         Label(itemsFrame, text='Acción').grid(row=0, column=8)
 
+    def on_configure(event):
+        canvas.configure(scrollregion=canvas.bbox('all'))
+
     ##################################### LOGOUT SECTION ############################################
     def logout():
         parent.update()
@@ -44,11 +41,25 @@ def initHome(parent, email):
     ##################################### DESIGN SECTION ############################################
 
     i = 1
-    itemsFrame = Frame(homeScreen)
+    canvas = Canvas(homeScreen)
+    canvas.configure()
+    canvas.grid(row=0, column=0)
+
+    scrollbar = Scrollbar(homeScreen, orient="vertical", command=canvas.yview)
+    scrollbar.grid(row=0, column=1, sticky="ns")
+
+    scrollbarX = Scrollbar(homeScreen, orient="horizontal", command=canvas.xview)
+    scrollbarX.grid(row=1, column=0, sticky="ew")
+
+    canvas.configure(yscrollcommand = scrollbar.set, xscrollcommand = scrollbarX.set)
+    canvas.bind('<Configure>', on_configure)
+
+    itemsFrame = Frame(canvas)
+    canvas.create_window((0,0), window=itemsFrame, anchor='nw')
+
     showHeader(itemsFrame)
     for item in obtener_items(email):
         showItem(itemsFrame, item, i)
         i+=1
-    itemsFrame.pack(fill='x')
 
-    Button(homeScreen, text='Salir', command=logout).pack()
+    Button(homeScreen, text='Salir', command=logout).grid(row=2, column=0)
