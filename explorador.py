@@ -36,4 +36,3 @@ def registrar_calificacion(usuario, referencia_mueble, calificacion):
         query_insercion = "UPDATE calificación SET puntaje=%s WHERE correo_usuario=%s AND referencia_mueble=%s"
         datos = (calificacion, usuario, referencia_mueble)
         ejecutar_actualizacion(query_insercion, datos)
-        

@@ -81,7 +81,7 @@ def buscarMuebles(cadena, categoria):
     return lista_muebles
 
 
-def buscar_muebles_inval():
+def extraer_muebles_inval():
     URL = 'https://inval.com.co/col/'
     page = requests.get(URL) 
     parser = BeautifulSoup(page.content, 'html.parser') 
