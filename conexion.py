@@ -12,7 +12,7 @@ conexion_db = mysql.connector.connect(
 def ejecutar_consulta(query):
     cursor = conexion_db.cursor()
     cursor.execute(query)
-    
+
     resultados = list()
     
     for resultado in cursor:
@@ -38,7 +38,3 @@ def ejecutar_insercion(query, datos):
     cursor.execute(query, datos)
     conexion_db.commit()
     cursor.close()
-    
-    
-
-
