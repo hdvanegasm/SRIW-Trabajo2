@@ -42,7 +42,14 @@ def recomendar_contenido(usuario):
     perfil_usuario_ponderado["alto"] = (perfil_usuario_ponderado["alto"] - np.min(datos["alto"])) / (np.max(datos["alto"]) - np.min(datos["alto"]))
     perfil_usuario_ponderado["profundo"] = (perfil_usuario_ponderado["profundo"] - np.min(datos["profundo"])) / (np.max(datos["profundo"]) - np.min(datos["profundo"]))
     
-    datos_no_calificados = datos[datos.isnull().any(axis=1)].drop("puntaje", axis=1)
+    datos_no_calificados = muebles_df.join(encoding_categorias).drop(
+            ["categoria", "referencia", "observaciones", "urls", "correo_usuario", "referencia_mueble"],
+            axis=1
+    )
+    
+    datos_no_calificados = datos_no_calificados[datos_no_calificados.estado != 0]
+    
+    datos_no_calificados = datos_no_calificados[datos_no_calificados.isnull().any(axis=1)].drop(["puntaje", "estado"], axis=1)
     
     datos_no_calificados['precio'] = datos_no_calificados.apply(
             normalizar, 

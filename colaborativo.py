@@ -9,7 +9,7 @@ def obtener_calificaciones():
     return result
 
 def obtener_muebles_no_calificados(usuario):
-    result = pd.read_sql("SELECT * FROM mueble LEFT JOIN ((SELECT * FROM calificación WHERE calificación.correo_usuario = \"%s\") AS tabla_calificacion) ON mueble.referencia = tabla_calificacion.referencia_mueble" % (usuario), conexion_db)
+    result = pd.read_sql("SELECT * FROM mueble LEFT JOIN ((SELECT * FROM calificación WHERE calificación.correo_usuario = \"%s\") AS tabla_calificacion) ON mueble.referencia = tabla_calificacion.referencia_mueble WHERE estado=1" % (usuario), conexion_db)
     return result[result.isnull().any(axis=1)]["referencia"]
 
 def predecir(fila, usuario, modelo):

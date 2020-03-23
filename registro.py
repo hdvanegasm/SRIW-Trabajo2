@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from conexion import *
 
 def initRegistration(parent):
@@ -9,17 +10,17 @@ def initRegistration(parent):
     global rpassword
 
     ##################################### UTILS ############################################
-    def checkIfNull(email, name, password, rpassword):
-        return email != '' and name != '' and password != '' and rpassword != ''
+    def checkIfNull(email, name, password, rpassword, preferencia):
+        return email != '' and name != '' and password != '' and rpassword != '' and preferencia != ''
 
     def checkPass(pass1, pass2):
         return pass1 == pass2
 
-    def insertUser(emailValue, nameValue, passValue):
+    def insertUser(emailValue, nameValue, passValue, preferenciaValue):
         query = ("INSERT INTO usuario "
-                "(correo, nombre, contrasena) "
-                "VALUES (%s, %s, %s)")
-        data = (emailValue, nameValue, passValue)
+                "(correo, nombre, contrasena, preferencia) "
+                "VALUES (%s, %s, %s, %s)")
+        data = (emailValue, nameValue, passValue, preferenciaValue)
         ejecutar_insercion(query, data)
         
     ################################ METODO NUEVO PARA OBTENER LAS CATEGORIAS ###################
@@ -40,6 +41,7 @@ def initRegistration(parent):
         name.delete(0, END)
         password.delete(0, END)
         rpassword.delete(0, END)
+        preferencia.delete(0, END)
 
     ##################################### REGISTER SECTION ############################################
     def registro():
@@ -47,13 +49,14 @@ def initRegistration(parent):
         nameValue = name.get()
         passValue = password.get()
         rpassValue = rpassword.get()
+        preferenciaValue = preferencia.get()
 
-        if (checkIfNull(emailValue, nameValue, passValue, rpassValue) and checkPass(passValue, rpassValue)):
-            insertUser(emailValue, nameValue, passValue)
+        if (checkIfNull(emailValue, nameValue, passValue, rpassValue, preferencia) and checkPass(passValue, rpassValue)):
+            insertUser(emailValue, nameValue, passValue, preferenciaValue)
             clearData()
 
         else : 
-            print('Falta data')
+            print('Falta información')
 
     ##################################### LOGIN SECTION ############################################
     def irALogin():
@@ -87,14 +90,19 @@ def initRegistration(parent):
     rpasswordLabel.grid(row=4, column=0, sticky=W)
     rpassword = Entry(registerScreen, show="*")
     rpassword.grid(row=4, column=1, padx=5, pady=5)
+    
+    preferenciaLabel = Label(registerScreen,text='Preferencia')
+    preferenciaLabel.grid(row=5, column=0, sticky=W)
+    preferencia = ttk.Combobox(registerScreen, values=getCategories())
+    preferencia.grid(row=5, column=1, padx=5, pady=5)
 
     # Login section
     login = Button(registerScreen, text='Ir a login', command=irALogin)
-    login.grid(row=5, column=1, padx=5, pady=5, sticky="nsew")
+    login.grid(row=6, column=1, padx=5, pady=5, sticky="nsew")
 
     # Register section
     register = Button(registerScreen, text='Register', command=registro)
-    register.grid(row=5, column=0, padx=5, pady=5, sticky="nsew")
+    register.grid(row=6, column=0, padx=5, pady=5, sticky="nsew")
 
     registerScreen.grid_columnconfigure(0,weight=1)
     registerScreen.grid_columnconfigure(1,weight=1)
