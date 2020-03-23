@@ -15,7 +15,6 @@ def calcular_distancia(fila, perfil_usuario):
     return np.linalg.norm(fila - perfil_usuario)
 
 def recomendar_contenido(usuario):
-    
     muebles_df = obtener_muebles_df(usuario)
     categorias_df = pd.DataFrame(muebles_df["categoria"])
     
