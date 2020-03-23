@@ -21,7 +21,20 @@ def initRegistration(parent):
                 "VALUES (%s, %s, %s)")
         data = (emailValue, nameValue, passValue)
         ejecutar_insercion(query, data)
-
+        
+    ################################ METODO NUEVO PARA OBTENER LAS CATEGORIAS ###################
+    def getCategories():
+        query = "SELECT DISTINCT categoria FROM mueble"
+        resultados = ejecutar_consulta(query)
+        
+        lista_categorias = list()
+        
+        for (elemento, ) in resultados:
+            lista_categorias.append(elemento)
+            
+        return lista_categorias
+    ################################################################################################
+    
     def clearData():
         email.delete(0, END)
         name.delete(0, END)
@@ -85,3 +98,4 @@ def initRegistration(parent):
 
     registerScreen.grid_columnconfigure(0,weight=1)
     registerScreen.grid_columnconfigure(1,weight=1)
+    
