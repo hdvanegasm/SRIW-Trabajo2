@@ -9,7 +9,7 @@ def initHome(parent, email):
 
     ##################################### UTILS ############################################
     def showMore(parent, item):
-        initDetails(parent, item)
+        initDetails(parent, item,email)
 
     def showItem(itemsFrame, item, i):
         Label(itemsFrame, text=item['referencia']).grid(row=i, column=0)
@@ -21,7 +21,7 @@ def initHome(parent, email):
         Label(itemsFrame, text=item['fondo']).grid(row=i, column=6)
         Label(itemsFrame, text=item['calificacion']).grid(row=i, column=7)
         Button(itemsFrame, text='Ver mas', command=lambda: showMore(itemsFrame, item)).grid(row=i, column=8)
-    
+
     def showHeader(itemsFrame):
         Label(itemsFrame, text='Referencia').grid(row=0, column=0)
         Label(itemsFrame, text='Categoria').grid(row=0, column=1)
