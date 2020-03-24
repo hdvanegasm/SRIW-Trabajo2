@@ -21,7 +21,7 @@ def actualizar_acierto(usuario, acierto):
         
 def registrar_acierto(usuario, calificacion, recomendacion):
     verificar_acierto(usuario)        
-    if abs(calificacion - recomendacion) <= 2:
+    if abs(calificacion - recomendacion) <= 1.5:
         actualizar_acierto(usuario, acierto=True)
     else:
         actualizar_acierto(usuario, acierto=False)

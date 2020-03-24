@@ -3,8 +3,8 @@ from contenido import *
 from conexion import *
 
 def integrar_recomendaciones(fila):   
-    ponderacion_colaborativo = 0.8
-    ponderacion_contenido = 0.2
+    ponderacion_colaborativo = 0.85
+    ponderacion_contenido = 0.15
     
     calificacion_contenido = 10 / (fila["distancia"] + 1)
     
@@ -35,5 +35,7 @@ def recomendar(usuario):
         return recomendacion.head(n=10)
     else:
         return obtener_muebles_preferidos(usuario).head(n=10)
+    
+print(recomendar("dani@hotm.com"))
 
 
