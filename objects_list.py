@@ -83,7 +83,7 @@ def initHome(parent, email):
         
         Button(homeScreen, text='Salir', command=logout).grid(row=5, column=0)
         Button(homeScreen, text='Recomendar', command= recomendaciones).grid(row=2, column=0)
-        #Button(homeScreen, text='Obtener Desempeño', command= desempeno).grid(row=3, column=0)
+        Button(homeScreen, text='Obtener Desempeño', command= desempeno).grid(row=3, column=0)
         Button(homeScreen, text='Atras', command= atras).grid(row=4, column=0)
         
     ##################################### DESIGN SECTION ############################################          
@@ -112,7 +112,7 @@ def initHome(parent, email):
     
     Button(homeScreen, text='Salir', command=logout).grid(row=5, column=0)
     Button(homeScreen, text='Recomendar', command= recomendaciones).grid(row=2, column=0)
-    Button(homeScreen, text='Obtener Desempeño', command= recomendaciones).grid(row=3, column=0)
+    Button(homeScreen, text='Obtener Desempeño', command= desempeno).grid(row=3, column=0)
     Button(homeScreen, text='Atras', command= atras).grid(row=4, column=0)
     
     
