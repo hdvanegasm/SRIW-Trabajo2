@@ -32,4 +32,4 @@ def obtener_desempeno(usuario):
     if len(resultado) == 0:
         return "No se puede calcular el desempeño"
     else:
-        return str(resultado[0][0]) + "%"
+        return "El desempeño de la recomendacion es: " + str(resultado[0][0]) + "%"
