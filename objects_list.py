@@ -57,8 +57,9 @@ def initHome(parent, email):
     ##################################### RECOMMENDATION ############################################
     def recomendaciones():
         
-        aciertoX(1)
+
         df = recomendar(email)
+        aciertoX(1, df)
         for items2 in itemsFrame.winfo_children():
             items2.destroy()
             

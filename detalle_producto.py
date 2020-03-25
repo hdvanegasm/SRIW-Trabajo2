@@ -8,16 +8,18 @@ from evaluacion import *
 from recomendador import *
 
 aciertoXY = 0
-
-def aciertoX(acierto):
+auxdf = 0
+def aciertoX(acierto, df):
     global aciertoXY 
+    global auxdf
     if(acierto == 1 ):
         aciertoXY = 1
     else:
         aciertoXY = 0
+    auxdf = df
     return True
     
-def initDetails(parent, item,email):
+def initDetails(parent, item, email):
     
     def on_configure(event):
         canvas.configure(scrollregion=canvas.bbox('all'))
@@ -26,7 +28,8 @@ def initDetails(parent, item,email):
 
     def checkRating(rating,referencia):
         global aciertoXY 
-        df = recomendar(email)
+        global df
+        df = auxdf
         if aciertoXY == 1:
             aux = (df.loc[df['referencia'] == item['referencia']])['recomendacion_hibrida'].values[0]
             registrar_acierto(email, int(rating.get()), int(aux))
