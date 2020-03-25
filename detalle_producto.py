@@ -8,6 +8,7 @@ from evaluacion import *
 from recomendador import *
 
 aciertoXY = 0
+
 def aciertoX(acierto):
     global aciertoXY 
     if(acierto == 1 ):
@@ -24,13 +25,14 @@ def initDetails(parent, item,email):
         webbrowser.open_new(url)
 
     def checkRating(rating,referencia):
+        global aciertoXY 
         df = recomendar(email)
-        print(str(aciertoXY))
         if aciertoXY == 1:
             aux = (df.loc[df['referencia'] == item['referencia']])['recomendacion_hibrida'].values[0]
-            
             registrar_acierto(email, int(rating.get()), int(aux))
-            
+        
+        aciertoXY = 0
+        
         if 1 <= (int(rating.get())) and (int(rating.get())) <= 10:
             query = ("INSERT INTO calificación "
                      "(referencia_mueble, correo_usuario, puntaje) "
