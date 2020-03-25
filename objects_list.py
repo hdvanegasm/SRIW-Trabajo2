@@ -76,6 +76,7 @@ def initHome(parent, email):
         print(obtener_desempeno(email))
         
     def atras():
+        aciertoX(0, 0)
         i = 1
         showHeader(itemsFrame)
         for item in obtener_items(email):

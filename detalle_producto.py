@@ -9,6 +9,7 @@ from recomendador import *
 
 aciertoXY = 0
 auxdf = 0
+
 def aciertoX(acierto, df):
     global aciertoXY 
     global auxdf

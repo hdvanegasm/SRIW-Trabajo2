@@ -36,6 +36,6 @@ def recomendar(usuario):
     else:
         return obtener_muebles_preferidos(usuario).head(n=10)
     
-#print(recomendar("da"))
+
 
 
