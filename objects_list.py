@@ -3,6 +3,7 @@ from explorador import *
 from modelo import *
 from detalle_producto import *
 from recomendador import *
+from evaluacion import *
 
 def initHome(parent, email):
     homeScreen = Toplevel(parent)
@@ -55,8 +56,8 @@ def initHome(parent, email):
 
     ##################################### RECOMMENDATION ############################################
     def recomendaciones():
-        print("Entre loca")
-
+        
+        aciertoX(1)
         df = recomendar(email)
         for items2 in itemsFrame.winfo_children():
             items2.destroy()
@@ -66,25 +67,28 @@ def initHome(parent, email):
         for item in obtener_items(email):
             for referencia in df['referencia']:
                 if (item['referencia'] == referencia):
-                    print(item)
                     showItem(itemsFrame, item , i)
                     i+=1
+        
                     
-                    
+    def desempeno():
+        print(obtener_desempeno(email))
+        
     def atras():
         i = 1
-
         showHeader(itemsFrame)
         for item in obtener_items(email):
             showItem(itemsFrame, item, i)
             i+=1
         
-        Button(homeScreen, text='Salir', command=logout).grid(row=4, column=0)
+        Button(homeScreen, text='Salir', command=logout).grid(row=5, column=0)
         Button(homeScreen, text='Recomendar', command= recomendaciones).grid(row=2, column=0)
-        Button(homeScreen, text='Atras', command= atras).grid(row=3, column=0)
+        #Button(homeScreen, text='Obtener Desempeño', command= desempeno).grid(row=3, column=0)
+        Button(homeScreen, text='Atras', command= atras).grid(row=4, column=0)
         
     ##################################### DESIGN SECTION ############################################          
     i = 1
+    
     canvas = Canvas(homeScreen, width=600, height=600)
     canvas.configure()
     canvas.grid(row=0, column=0)
@@ -106,9 +110,11 @@ def initHome(parent, email):
         showItem(itemsFrame, item, i)
         i+=1
     
-    Button(homeScreen, text='Salir', command=logout).grid(row=4, column=0)
+    Button(homeScreen, text='Salir', command=logout).grid(row=5, column=0)
     Button(homeScreen, text='Recomendar', command= recomendaciones).grid(row=2, column=0)
-    Button(homeScreen, text='Atras', command= atras).grid(row=3, column=0)
+    Button(homeScreen, text='Obtener Desempeño', command= recomendaciones).grid(row=3, column=0)
+    Button(homeScreen, text='Atras', command= atras).grid(row=4, column=0)
+    
     
     ##################################### BOTON RECOMENDAR ############################################
 

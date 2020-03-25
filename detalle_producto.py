@@ -3,15 +3,34 @@ from explorador import *
 from modelo import *
 from conexion import *
 import webbrowser
+from objects_list import *
+from evaluacion import *
+from recomendador import *
 
+aciertoXY = 0
+def aciertoX(acierto):
+    global aciertoXY 
+    if(acierto == 1 ):
+        aciertoXY = 1
+    else:
+        aciertoXY = 0
+    return True
+    
 def initDetails(parent, item,email):
-
+    
     def on_configure(event):
         canvas.configure(scrollregion=canvas.bbox('all'))
     def openweb(url):
         webbrowser.open_new(url)
 
     def checkRating(rating,referencia):
+        df = recomendar(email)
+        print(str(aciertoXY))
+        if aciertoXY == 1:
+            aux = (df.loc[df['referencia'] == item['referencia']])['recomendacion_hibrida'].values[0]
+            
+            registrar_acierto(email, int(rating.get()), int(aux))
+            
         if 1 <= (int(rating.get())) and (int(rating.get())) <= 10:
             query = ("INSERT INTO calificación "
                      "(referencia_mueble, correo_usuario, puntaje) "
@@ -27,8 +46,7 @@ def initDetails(parent, item,email):
             rating.delete(0, END)
             return False
 
-
-
+    
     detailScreen = Toplevel(parent)
     detailScreen.title('Detalles producto')
 
