@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from explorador import *
 from modelo import *
 from detalle_producto import *
@@ -73,7 +74,13 @@ def initHome(parent, email):
         
                     
     def desempeno():
-        print(obtener_desempeno(email))
+        aux = obtener_desempeno(email)
+        window = Tk()
+        window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
+        window.withdraw()
+        messagebox.showinfo('Desempeño Recomendacion', aux)
+        window.deiconify()
+        window.destroy()
         
     def atras():
         aciertoX(0, 0)
