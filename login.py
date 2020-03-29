@@ -63,5 +63,4 @@ loadData.grid(row=4, column=0, columnspan=2, sticky="nsew")
 
 screen.grid_columnconfigure(0,weight=1)
 screen.grid_columnconfigure(1,weight=1)
-
 screen.mainloop()
