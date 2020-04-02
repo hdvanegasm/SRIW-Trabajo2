@@ -24,6 +24,14 @@ def insertar_muebles(lista_muebles):
     
     # Items nuevos y las actualizaciones
     for mueble in lista_muebles:
+        if mueble.precio == "":
+        if mueble.peso == "":
+            mueble.peso = 0
+        if mueble.ancho == "":
+            mueble.ancho = 0
+        if mueble.fondo == "":
+            mueble.fondo = 0
+        
         if mueble.referencia not in lista_referencias_db:
             query_insercion = ("INSERT INTO mueble "
                 "(referencia, categoria, precio, peso, ancho, alto, profundo, urls, observaciones, estado) "
@@ -76,13 +84,14 @@ def insertar_muebles(lista_muebles):
 
     
 
+
 def poblar_db():
-    print("==> Cargando base de datos Inval")
-    lista_inval = extraer_muebles_inval()
+    #print("==> Cargando base de datos Inval")
+    lista_inval = [] #extraer_muebles_inval()
     
     print("==> Cargando base de datos Homecenter")
     lista_homecenter = extraer_muebles_homecenter()
-    
+
     print("==> Integrando bases de datos")
     lista_integrada = integrar_scrappers(lista_inval, lista_homecenter)
     

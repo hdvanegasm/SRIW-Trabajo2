@@ -19,12 +19,6 @@ def valorcitotofloat(valorcito):
   
 def extraer_muebles_homecenter():
   lista_muebles = []
-
-  for pagina in range (1,4):
-    URL = 'https://www.homecenter.com.co/homecenter-co/search/?Ntt=inval&sTerm=inval&sType=suggest&sScenario=BTP_SUG_inval&currentpage=' + str(pagina)
-    page = requests.get(URL)
-    parser = BeautifulSoup(page.content, 'html.parser')
-    lista = parser.find('div', class_='jsx-3663142191 search-results-products-container')
   
     for i in lista:
       referencia = ""
@@ -44,6 +38,7 @@ def extraer_muebles_homecenter():
 
       precio = price.text.strip()
       precio = int(str(''.join(filter(lambda i: i.isdigit(), precio))))
+        link = ("https://www.homecenter.com.co" + link)
 
       URL2 = link
       #URL2 = "https://www.homecenter.com.co/homecenter-co/product/415024/Comoda-3-Cajones-75x80x37-5cm-Amaretto/415024"
@@ -56,6 +51,7 @@ def extraer_muebles_homecenter():
       peso = ''
       referencia = ''
   
+        precio = int(str(''.join(filter(lambda i: i.isdigit(), precio))))
 
       lista2 = parser.find('div', class_='simple-table')
       caracteristica = lista2.find_all('div', class_='row')
@@ -84,5 +80,7 @@ def extraer_muebles_homecenter():
       if referencia != "":  
         mueble = Mueble(referencia, tipo, precio, peso, ancho, alto, fondo, [link])
         lista_muebles.append(mueble)
+    
 
+      pass
   return lista_muebles
