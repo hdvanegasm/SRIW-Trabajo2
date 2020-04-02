@@ -25,10 +25,13 @@ def insertar_muebles(lista_muebles):
     # Items nuevos y las actualizaciones
     for mueble in lista_muebles:
         if mueble.precio == "":
+            mueble.precio = 0
         if mueble.peso == "":
             mueble.peso = 0
         if mueble.ancho == "":
             mueble.ancho = 0
+        if mueble.alto == "":
+            mueble.alto = 0
         if mueble.fondo == "":
             mueble.fondo = 0
         
@@ -97,3 +100,4 @@ def poblar_db():
     
     print("==> Actualizando base de datos")
     insertar_muebles(lista_integrada)
+    print("==> Base de datos actualizada")
