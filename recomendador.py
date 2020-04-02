@@ -1,14 +1,18 @@
 from colaborativo import *
 from contenido import *
 from conexion import *
+from numpy import isnan
 
-def integrar_recomendaciones(fila):   
+def integrar_recomendaciones(fila):
+    
     ponderacion_colaborativo = 0.85
     ponderacion_contenido = 0.15
-    
-    calificacion_contenido = 10 / (fila["distancia"] + 1)
-    
-    return ponderacion_colaborativo * fila["calificacion"] + ponderacion_contenido * calificacion_contenido
+    if not isnan(fila["calificacion"] ):       
+        calificacion_contenido = 10 / (fila["distancia"] + 1)
+        
+        return ponderacion_colaborativo * fila["calificacion"] + ponderacion_contenido * calificacion_contenido
+    else:
+        return calificacion_contenido
 
 def hay_calificaciones(usuario):
     query_verificacion = "SELECT * FROM calificación WHERE correo_usuario=\"%s\"" % (usuario)
@@ -26,7 +30,7 @@ def recomendar(usuario):
     if hay_calificaciones(usuario):    
         recomendacion_colaborativa = recomendar_colaborativo(usuario)
         recomendacion_contenido = recomendar_contenido(usuario)
-    
+
         recomendacion = recomendacion_colaborativa.join(recomendacion_contenido.set_index("referencia"), on="referencia")
         recomendacion["recomendacion_hibrida"] = recomendacion.apply(integrar_recomendaciones, axis=1)
       

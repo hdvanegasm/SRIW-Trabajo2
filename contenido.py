@@ -8,6 +8,9 @@ def obtener_muebles_df(usuario):
     return result
 
 def normalizar(fila, columna, minimo, maximo):
+    if minimo == maximo:
+        nuevo = (fila[columna] - minimo)
+        return nuevo
     nuevo = (fila[columna] - minimo) / float(maximo - minimo)
     return nuevo
 
@@ -36,11 +39,30 @@ def recomendar_contenido(usuario):
     
     perfil_usuario_ponderado = (1 / sumatoria_calificaciones).dot(perfil_usuario)
     
-    perfil_usuario_ponderado["precio"] = (perfil_usuario_ponderado["precio"] - np.min(datos["precio"])) / (np.max(datos["precio"]) - np.min(datos["precio"]))
-    perfil_usuario_ponderado["peso"] = (perfil_usuario_ponderado["peso"] - np.min(datos["peso"])) / (np.max(datos["peso"]) - np.min(datos["peso"]))
-    perfil_usuario_ponderado["ancho"] = (perfil_usuario_ponderado["ancho"] - np.min(datos["ancho"])) / (np.max(datos["ancho"]) - np.min(datos["ancho"]))
-    perfil_usuario_ponderado["alto"] = (perfil_usuario_ponderado["alto"] - np.min(datos["alto"])) / (np.max(datos["alto"]) - np.min(datos["alto"]))
-    perfil_usuario_ponderado["profundo"] = (perfil_usuario_ponderado["profundo"] - np.min(datos["profundo"])) / (np.max(datos["profundo"]) - np.min(datos["profundo"]))
+    if (np.max(datos["precio"]) == np.min(datos["precio"])):
+        perfil_usuario_ponderado["precio"] = (perfil_usuario_ponderado["precio"] - np.min(datos["precio"]))
+    else:
+        perfil_usuario_ponderado["precio"] = (perfil_usuario_ponderado["precio"] - np.min(datos["precio"])) / (np.max(datos["precio"]) - np.min(datos["precio"]))
+    
+    if (np.max(datos["peso"]) == np.min(datos["peso"])):
+        perfil_usuario_ponderado["peso"] = (perfil_usuario_ponderado["peso"] - np.min(datos["peso"])) 
+    else:
+        perfil_usuario_ponderado["peso"] = (perfil_usuario_ponderado["peso"] - np.min(datos["peso"])) / (np.max(datos["peso"]) - np.min(datos["peso"]))
+    
+    if (np.max(datos["ancho"]) == np.min(datos["ancho"])):
+        perfil_usuario_ponderado["ancho"] = (perfil_usuario_ponderado["ancho"] - np.min(datos["ancho"])) 
+    else:
+        perfil_usuario_ponderado["ancho"] = (perfil_usuario_ponderado["ancho"] - np.min(datos["ancho"])) / (np.max(datos["ancho"]) - np.min(datos["ancho"]))
+    
+    if (np.max(datos["alto"]) == np.min(datos["alto"])):
+        perfil_usuario_ponderado["alto"] = (perfil_usuario_ponderado["alto"] - np.min(datos["alto"])) 
+    else:
+        perfil_usuario_ponderado["alto"] = (perfil_usuario_ponderado["alto"] - np.min(datos["alto"])) / (np.max(datos["alto"]) - np.min(datos["alto"]))
+    
+    if (np.max(datos["profundo"]) == np.min(datos["profundo"])):
+        perfil_usuario_ponderado["profundo"] = (perfil_usuario_ponderado["profundo"] - np.min(datos["profundo"])) 
+    else:
+        perfil_usuario_ponderado["profundo"] = (perfil_usuario_ponderado["profundo"] - np.min(datos["profundo"])) / (np.max(datos["profundo"]) - np.min(datos["profundo"]))
     
     datos_no_calificados = muebles_df.join(encoding_categorias).drop(
             ["categoria", "referencia", "observaciones", "urls", "correo_usuario", "referencia_mueble"],
