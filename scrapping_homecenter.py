@@ -44,17 +44,7 @@ def extraer_muebles_homecenter():
         link = link['href']
         link = ("https://www.homecenter.com.co" + link)
 
-      URL2 = link
-      #URL2 = "https://www.homecenter.com.co/homecenter-co/product/415024/Comoda-3-Cajones-75x80x37-5cm-Amaretto/415024"
-      page = requests.get(URL2)
-      parser = BeautifulSoup(page.content, 'html.parser')
-      ancho = ''
-      alto = ''
-      fondo = ''
-      tipo = ''
-      peso = ''
-      referencia = ''
-  
+        precio = price.text.strip()
         precio = int(str(''.join(filter(lambda i: i.isdigit(), precio))))
 
         URL2 = link

@@ -85,7 +85,6 @@ def insertar_muebles(lista_muebles):
             ejecutar_actualizacion(query_inactivacion, datos_inactivacion)
     
 
-    
 
 
 def poblar_db():
